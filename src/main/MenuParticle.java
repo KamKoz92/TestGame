@@ -14,8 +14,8 @@ public class MenuParticle extends GameObject {
     public MenuParticle(float x, float y, ID id, Handler handler) {
         super(x, y, id);
         this.handler = handler;
-        velY = 9;
-        velX = 2;
+        velY = r.nextInt(6) + 1;
+        velX = r.nextInt(6) + 1;
 
         col = new Color(r.nextInt(255), r.nextInt(255), r.nextInt(255));
     }

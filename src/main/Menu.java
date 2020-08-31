@@ -14,10 +14,22 @@ public class Menu extends MouseAdapter{
     private Game game;
     private Handler handler;
     private Random r;
-    public Menu(Game game, Handler handler) {
+    private HUD hud;
+
+    private Font fnt;
+    private Font fnt2;
+    private Font fnt3;
+
+    public Menu(Game game, Handler handler, HUD hud) {
         this.game = game;
         this.handler = handler;
         r = new Random();
+        this.hud = hud;
+        fnt = new Font("arial", 1, 50);
+        fnt2 = new Font("arial", 1, 30);
+        fnt3 = new Font("arial", 1, 20);
+
+
     }
 
     public void mousePressed(MouseEvent e) {
@@ -43,7 +55,13 @@ public class Menu extends MouseAdapter{
                 game.gameState = STATE.Menu;
             }
         }
-        
+        else if(game.gameState == STATE.End) {
+            if(mouseOver(mx, my, 210, 350, 200, 64)) {
+                game.gameState = STATE.Menu;
+                hud.setLevel(1);
+                hud.setScore(0);
+            }
+        }
     }
 
     public void mouseReleased(MouseEvent e) {
@@ -68,8 +86,7 @@ public class Menu extends MouseAdapter{
     }
     public void render(Graphics g) {
         if(game.gameState == STATE.Menu) {
-            Font fnt = new Font("arial", 1, 50);
-            Font fnt2 = new Font("arial", 1, 30);
+
             g.setFont(fnt);
             g.setColor(Color.white);
             g.drawString("Menu", 240, 70);
@@ -82,9 +99,6 @@ public class Menu extends MouseAdapter{
             g.drawString("Quit", 278, 390);
         }
         else if(game.gameState == STATE.Help) {
-            Font fnt = new Font("arial", 1, 50);
-            Font fnt2 = new Font("arial", 1, 30);
-            Font fnt3 = new Font("arial", 1, 20);
 
             g.setColor(Color.white);
             g.setFont(fnt);
@@ -97,6 +111,20 @@ public class Menu extends MouseAdapter{
             g.drawRect(210, 350, 200, 64);
             g.setFont(fnt2);
             g.drawString("Back", 278, 390);
+        }
+        else if(game.gameState == STATE.End) {
+
+            g.setColor(Color.white);
+            g.setFont(fnt);
+            g.drawString("Game Over", 180, 70);
+
+            g.setFont(fnt3);
+            g.drawString("Your score: " + hud.getScore(), 250, 250);
+
+
+            g.drawRect(210, 350, 200, 64);
+            g.setFont(fnt2);
+            g.drawString("Try Again", 245, 390);
         }
         
     }   
