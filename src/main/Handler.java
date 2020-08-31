@@ -26,4 +26,12 @@ public class Handler {
     public void removeObject(GameObject object) {
         this.objects.remove(object);
     }
+    public void clearEnemies() {
+        GameObject tempObject;
+        int size = objects.size();
+        for(int i = size - 1; i > 0; i--) {
+            tempObject = objects.get(i);
+            removeObject(tempObject);
+        }
+    }
 }

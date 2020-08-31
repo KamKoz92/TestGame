@@ -8,7 +8,7 @@ import java.awt.Color;
 public class BossEnemy extends GameObject {
 
     Handler handler;
-    private int timer = 20;
+    private int timer = 60;
     private int timer2 = 40;
     Random r = new Random();
     public BossEnemy(int x, int y, ID id, Handler handler) {
