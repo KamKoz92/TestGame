@@ -18,6 +18,7 @@ public class Game extends Canvas implements Runnable {
     private HUD hud;
     private Spawn spawner;
     private Menu menu;
+    private Random r;
     public enum STATE {
         Menu,
         Help,
@@ -32,13 +33,18 @@ public class Game extends Canvas implements Runnable {
         this.addMouseListener(menu);
         hud = new HUD();
         spawner = new Spawn(handler, hud);
-        
+        r = new Random();
         new Window(WIDTH, HEIGHT, "Wave", this);
 
         // if(gameState == STATE.Game) {
         //     handler.addObject(new Player(WIDTH/2, HEIGHT/2, ID.Player, handler));
         //     handler.addObject(new BasicEnemy(r.nextInt(WIDTH- 50), r.nextInt(HEIGHT - 50), ID.BasicEnemy, handler));
         // }
+        if(gameState == STATE.Menu) {
+            for(int i = 0; i < 10; i++) {
+                handler.addObject(new MenuParticle(r.nextInt(WIDTH- 50), r.nextInt(HEIGHT - 50), ID.MenuParticle, handler));
+            }
+        }
     }
     public synchronized void start() {
         thread = new Thread(this);
@@ -77,8 +83,8 @@ public class Game extends Canvas implements Runnable {
         stop();
     }
     private void tick() {
+        handler.tick();
         if(gameState == STATE.Game) {
-            handler.tick();
             hud.tick();
             spawner.tick ();
         } 

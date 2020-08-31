@@ -15,8 +15,15 @@ public class Handler {
     }
     public void render(Graphics g) {
         for(int i = 0; i < objects.size(); i++) {
-            GameObject tempObject = objects.get(i);
-            tempObject.render(g);
+            try {
+                GameObject tempObject = objects.get(i);
+                tempObject.render(g);
+            }
+            catch(Exception e) {
+                e.printStackTrace();
+                System.out.println(objects.size());
+            }
+            
         }
     }
     
@@ -32,6 +39,6 @@ public class Handler {
         for(int i = size - 1; i > 0; i--) {
             tempObject = objects.get(i);
             removeObject(tempObject);
-        }
+        } 
     }
 }

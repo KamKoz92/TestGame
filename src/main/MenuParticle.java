@@ -2,16 +2,22 @@ package main;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.util.Random;
 import java.awt.Color;
 
-public class FastEnemy extends GameObject {
+public class MenuParticle extends GameObject {
 
-    Handler handler;
-    public FastEnemy(float x, float y, ID id, Handler handler) {
+    private Handler handler;
+    private Random r = new Random();
+    private Color col;
+
+    public MenuParticle(float x, float y, ID id, Handler handler) {
         super(x, y, id);
         this.handler = handler;
         velY = 9;
         velX = 2;
+
+        col = new Color(r.nextInt(255), r.nextInt(255), r.nextInt(255));
     }
 
     @Override
@@ -22,11 +28,11 @@ public class FastEnemy extends GameObject {
             velY *= -1;
         if (x <= 0 || x >= Game.WIDTH - 32)
             velX *= -1;
-        handler.addObject(new Trail(x, y, ID.Trail, Color.CYAN, handler, 16, 16, 0.05f));
+        handler.addObject(new Trail(x, y, ID.Trail, col, handler, 16, 16, 0.05f));
     }
 
     public void render(Graphics g) {
-        g.setColor(Color.CYAN);
+        g.setColor(col);
         g.fillRect((int) x, (int) y, 16, 16);
     }
 

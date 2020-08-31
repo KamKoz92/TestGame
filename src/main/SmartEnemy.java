@@ -30,11 +30,11 @@ public class SmartEnemy extends GameObject {
         velY = (float)((-1/distance) * diffY) * 1.5f;
 
 
-        handler.addObject(new Trail(x, y, ID.Trail, Color.red, handler, 16, 16, 0.05f));
+        handler.addObject(new Trail(x, y, ID.Trail, Color.green, handler, 16, 16, 0.05f));
     }
 
     public void render(Graphics g) {
-        g.setColor(Color.red);
+        g.setColor(Color.green);
         g.fillRect((int) x,(int) y, 16, 16);
     }
 
