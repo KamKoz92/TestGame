@@ -38,10 +38,11 @@ public class Menu extends MouseAdapter{
 
         if(game.gameState == STATE.Menu) {
             if(mouseOver(mx, my, 210, 150, 200, 64)) {
-                game.gameState = STATE.Game;
-                handler.objects.clear();
-                handler.addObject(new Player(Game.WIDTH/2, Game.HEIGHT/2, ID.Player, handler));
-                handler.addObject(new BasicEnemy(r.nextInt(Game.WIDTH- 50), r.nextInt(Game.HEIGHT - 50), ID.BasicEnemy, handler));
+                // game.gameState = STATE.Game;
+                // handler.objects.clear();
+                // handler.addObject(new Player(Game.WIDTH/2, Game.HEIGHT/2, ID.Player, handler));
+                // handler.addObject(new BasicEnemy(r.nextInt(Game.WIDTH- 50), r.nextInt(Game.HEIGHT - 50), ID.BasicEnemy, handler));
+                game.gameState = STATE.Select;
             }
             if(mouseOver(mx, my, 210, 250, 200, 64)) {
                 game.gameState = STATE.Help;
@@ -62,8 +63,26 @@ public class Menu extends MouseAdapter{
                 hud.setScore(0);
             }
         }
+        else if(game.gameState == STATE.Select) {
+            if(mouseOver(mx, my, 210, 150, 200, 64)) {
+                game.gameState = STATE.Game;
+                handler.objects.clear();
+                handler.addObject(new Player(Game.WIDTH/2, Game.HEIGHT/2, ID.Player, handler));
+                handler.addObject(new BasicEnemy(r.nextInt(Game.WIDTH- 50), r.nextInt(Game.HEIGHT - 50), ID.BasicEnemy, handler)); 
+                game.diff = 0;
+            }
+            if(mouseOver(mx, my, 210, 250, 200, 64)) {
+                game.gameState = STATE.Game;
+                handler.objects.clear();
+                handler.addObject(new Player(Game.WIDTH/2, Game.HEIGHT/2, ID.Player, handler));
+                handler.addObject(new HardEnemy(r.nextInt(Game.WIDTH- 50), r.nextInt(Game.HEIGHT - 50), ID.BasicEnemy, handler)); 
+                game.diff = 1;
+            }
+            if(mouseOver(mx, my, 210, 350, 200, 64)) {
+                game.gameState = STATE.Menu;          
+            }
+        }
     }
-
     public void mouseReleased(MouseEvent e) {
 
     }
@@ -126,6 +145,20 @@ public class Menu extends MouseAdapter{
             g.setFont(fnt2);
             g.drawString("Try Again", 245, 390);
         }
+        else if(game.gameState == STATE.Select) {
+
+            g.setFont(fnt);
+            g.setColor(Color.white);
+            g.drawString("Select Difficulty", 140, 70);
+            g.setFont(fnt2);
+            g.drawRect(210, 150, 200, 64);
+            g.drawString("Normal", 278, 190);
+            g.drawRect(210, 250, 200, 64);
+            g.drawString("Hard", 278, 290);
+            g.drawRect(210, 350, 200, 64);
+            g.drawString("Back", 278, 390);
+        }
+        
         
     }   
 }

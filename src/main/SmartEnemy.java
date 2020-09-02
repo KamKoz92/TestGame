@@ -3,11 +3,14 @@ package main;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.Color;
+//import java.awt.image.BufferedImage;
 
 public class SmartEnemy extends GameObject {
 
-    Handler handler;
-    GameObject player;
+    private Handler handler;
+    private GameObject player;
+    //private BufferedImage enemy_image;
+    //private SpriteSheet ss;
     private float diffX, diffY, distance;
     public SmartEnemy(int x, int y, ID id, Handler handler) {
         super(x, y, id);
@@ -15,6 +18,8 @@ public class SmartEnemy extends GameObject {
         velY = 4;
         velX = 4;
         player = handler.objects.getFirst();
+        //ss = new SpriteSheet(Game.sprite_sheet);
+        //enemy_image = ss.loadImage(2, 1, 16, 16);
     }
 
     @Override
@@ -35,7 +40,8 @@ public class SmartEnemy extends GameObject {
 
     public void render(Graphics g) {
         g.setColor(Color.green);
-        g.fillRect((int) x,(int) y, 16, 16);
+        g.drawRect((int)x, (int)y, 16, 16);
+        //g.drawImage(enemy_image, (int)x, (int)y, null);
     }
 
     public Rectangle getBounds() {

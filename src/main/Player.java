@@ -1,16 +1,19 @@
 package main;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-// import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 public class Player extends GameObject {
 
+    private BufferedImage player_image;
+    private SpriteSheet ss;
     Handler handler;
     public Player(int x, int y, ID id, Handler handler) {
         super(x, y, id);
         this.handler = handler;
+        this.ss = new SpriteSheet(Game.sprite_sheet);
+        player_image = ss.loadImage(1, 1, 32, 32);
     }
 
     public void tick() {
@@ -33,8 +36,7 @@ public class Player extends GameObject {
         }
     }
     public void render(Graphics g) {
-        g.setColor(Color.white);
-        g.fillRect((int) x,(int) y, 32, 32);
+        g.drawImage(player_image, (int)x,(int)y, null);
     }
 
     public Rectangle getBounds() {
