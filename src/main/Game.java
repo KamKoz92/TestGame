@@ -41,9 +41,10 @@ public class Game extends Canvas implements Runnable {
         handler = new Handler();
         this.addKeyListener(new KeyInput(handler, this));
         hud = new HUD();
-        shop = new Shop(handler);
+        shop = new Shop(handler, hud, this);
         menu = new Menu(this, handler,hud);
         this.addMouseListener(menu);
+        this.addMouseListener(shop);
         spawner = new Spawn(handler, hud, this);
         r = new Random();
         new Window(WIDTH, HEIGHT, "Wave", this);
@@ -109,6 +110,8 @@ public class Game extends Canvas implements Runnable {
                     for(int i = 0; i < 10; i++) {
                         handler.addObject(new MenuParticle(r.nextInt(WIDTH- 50), r.nextInt(HEIGHT - 50), ID.MenuParticle, handler));
                     }
+                    shop.reset();
+                    hud.bounds = 0;
                 }
             }
         } 
@@ -129,16 +132,18 @@ public class Game extends Canvas implements Runnable {
 
         g.setColor(Color.black);
         g.fillRect(0, 0, WIDTH, HEIGHT);
-        handler.render(g);
+        
         if(paused) {
             g.setColor(Color.white);
             g.drawString("PAUSED", 100, 100);
         }
         if(gameState == STATE.Game) {
             hud.render(g);
+            handler.render(g);////////
         }
         else if(gameState == STATE.Menu || gameState == STATE.Help || gameState == STATE.End || gameState == STATE.Select){
             menu.render(g);
+            handler.render(g);///////
         }
         else if(gameState == STATE.Shop) {
             shop.render(g);
