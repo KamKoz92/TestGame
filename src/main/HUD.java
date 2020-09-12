@@ -7,18 +7,18 @@ public class HUD {
     public static float HEALTH = 100;
     private int score = 0;
     private int level = 1;
-
+    public int bounds = 0;
     public void tick() {
-        HEALTH = Game.clamp(HEALTH, 0.0f, 100.0f);
+        HEALTH = Game.clamp(HEALTH, 0, 100+(bounds/2));
         score++;
     }
     public void render(Graphics g) {
         g.setColor(Color.red);
-        g.fillRect(15, 15, 200, 16);
+        g.fillRect(15, 15, 200 + bounds, 16);
         g.setColor(Color.green);
-        g.fillRect(15, 15,(int) HEALTH * 2, 16);
+        g.fillRect(15, 15,(int) HEALTH * 2 , 16);
         g.setColor(Color.white);
-        g.drawRect(15, 15, 200, 16);
+        g.drawRect(15, 15, 200+ bounds, 16);
 
         g.drawString("Score: " + score, 15, 48);
         g.drawString("Level: " + level, 15, 64);

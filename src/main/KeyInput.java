@@ -31,7 +31,7 @@ public class KeyInput extends KeyAdapter {
         else if(key == KeyEvent.VK_ESCAPE) System.exit(1);
         else if(key == KeyEvent.VK_SPACE) {
             if(game.gameState == STATE.Game) game.gameState = STATE.Shop;
-            else game.gameState = STATE.Game;
+            else if(game.gameState == STATE.Shop) game.gameState = STATE.Game;
         }
         else {
             // for(int i = 0; i < handler.objects.size(); i++) {
@@ -56,19 +56,19 @@ public class KeyInput extends KeyAdapter {
             //     }
             // }
             if(key == KeyEvent.VK_W) {
-                handler.objects.getFirst().setVelY(-5);
+                handler.objects.getFirst().setVelY(-handler.spd);
                 keyDown[0] = true;
             }
             else if(key == KeyEvent.VK_S) {
-                handler.objects.getFirst().setVelY(5);
+                handler.objects.getFirst().setVelY(handler.spd);
                 keyDown[1] = true;
             }
             else if(key == KeyEvent.VK_A) {
-                handler.objects.getFirst().setVelX(-5);
+                handler.objects.getFirst().setVelX(-handler.spd);
                 keyDown[2] = true;
             }
             else if(key == KeyEvent.VK_D) {
-                handler.objects.getFirst().setVelX(5);
+                handler.objects.getFirst().setVelX(handler.spd);
                 keyDown[3] = true;
             }           
         }
